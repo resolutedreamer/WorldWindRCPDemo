@@ -29,7 +29,12 @@ public class SamplePart {
 	
 	class SimplestPossibleExample extends JFrame
 	{
-	    public SimplestPossibleExample()
+	    /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public SimplestPossibleExample()
 	    {
 	        WorldWindowGLCanvas wwd = new WorldWindowGLCanvas();
 	        wwd.setPreferredSize(new java.awt.Dimension(1000, 800));
