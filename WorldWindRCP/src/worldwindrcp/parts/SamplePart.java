@@ -1,6 +1,7 @@
 package worldwindrcp.parts;
 
-import java.awt.EventQueue;
+
+import java.awt.Color;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -20,6 +21,7 @@ import org.eclipse.swt.widgets.Text;
 
 import gov.nasa.worldwind.BasicModel;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
+import gov.nasa.worldwind.awt.WorldWindowGLJPanel;
 
 import javax.swing.*;
 
@@ -27,7 +29,7 @@ public class SamplePart {
 
 	private TableViewer tableViewer;
 	
-	class SimplestPossibleExample extends JFrame
+	class SimplestPossibleExample extends JPanel
 	{
 	    /**
 		 * 
@@ -36,20 +38,27 @@ public class SamplePart {
 
 		public SimplestPossibleExample()
 	    {
-	        WorldWindowGLCanvas wwd = new WorldWindowGLCanvas();
+			WorldWindowGLJPanel wwd = new WorldWindowGLJPanel();
 	        wwd.setPreferredSize(new java.awt.Dimension(1000, 800));
-	        this.getContentPane().add(wwd, java.awt.BorderLayout.CENTER);
+	        //this.getContentPane().add(wwd, java.awt.BorderLayout.CENTER);
 	        wwd.setModel(new BasicModel());
 	    }
 
 	}
 	@Inject
 	private MPart part;
+	
+    // JButton 
+    static JButton b, b1, b2; 
+  
+    // label to display text 
+    static JLabel l; 
 
 	@PostConstruct
 	public void createComposite(Composite parent) {
-		parent.setLayout(new GridLayout(1, false));
+		//parent.setLayout(new GridLayout(1, false));
 
+		/*
 		Text txtInput = new Text(parent, SWT.BORDER);
 		txtInput.setMessage("Enter text to mark part as dirty");
 		txtInput.addModifyListener(e -> part.setDirty(true));
@@ -60,14 +69,43 @@ public class SamplePart {
 		tableViewer.setContentProvider(ArrayContentProvider.getInstance());
 		tableViewer.setInput(createInitialDataModel());
 		tableViewer.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
+		*/
 		
 		System.out.println("Gonna do the invoke later");
 		
+		
+        // create a label to display text 
+        l = new JLabel("panel label"); 
+  
+        // create a new buttons 
+        b = new JButton("button1"); 
+        b1 = new JButton("button2"); 
+        b2 = new JButton("button3"); 
+  
+        // create a panel to add buttons 
+        JPanel p = new JPanel(); 
+  
+        // add buttons and textfield to panel 
+        p.add(b); 
+        p.add(b1); 
+        p.add(b2); 
+        p.add(l); 
+  
+        // setbackground of panel 
+        p.setBackground(Color.red); 
+
+		
 		// Setup AWT container.
 		Composite embeddedContainer = new Composite(parent, SWT.EMBEDDED);
-		java.awt.Frame frame = SWT_AWT.new_Frame(embeddedContainer);
-		java.awt.Panel panel = new java.awt.Panel(new java.awt.BorderLayout());
-		frame.add(panel);
+		java.awt.Frame containerFrame = SWT_AWT.new_Frame(embeddedContainer);
+		//java.awt.Panel panel = new java.awt.Panel(new java.awt.BorderLayout());
+		//frame.add(panel);
+		containerFrame.add(p);
+		
+	    JApplet applet = new JApplet();
+	    containerFrame.add(applet);
+	      
+
 		
 		// Create World Wind canvas and add it to panel.
 		/*
@@ -81,10 +119,21 @@ public class SamplePart {
             public void run()
             {
         		System.out.println("Insider run");
-                JFrame frame = new SimplestPossibleExample();
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.pack();
-                frame.setVisible(true);
+        		JPanel panel = new SimplestPossibleExample();
+        		
+    			WorldWindowGLJPanel wwd = new WorldWindowGLJPanel();
+    	        wwd.setPreferredSize(new java.awt.Dimension(1000, 800));
+    	        //this.getContentPane().add(wwd, java.awt.BorderLayout.CENTER);
+    	        wwd.setModel(new BasicModel());
+    	        containerFrame.add(wwd);
+        		
+                //panel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                //panel.pack();                
+                //containerFrame.add(panel);
+                //containerFrame.getContentPane().add(wwd, java.awt.BorderLayout.CENTER);
+
+                //applet.add(panel);
+                //frame.setVisible(true);
             }
         });
 		
