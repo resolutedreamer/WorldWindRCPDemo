@@ -75,7 +75,7 @@ public class SamplePart {
 		wwd.setModel(new BasicModel());
 		panel.add(wwd, java.awt.BorderLayout.CENTER);
         */
-		/*
+		
         java.awt.EventQueue.invokeLater(new Runnable()
         {
             public void run()
@@ -87,16 +87,7 @@ public class SamplePart {
                 frame.setVisible(true);
             }
         });
-		*/
-        EventQueue.invokeLater(new Runnable() { 
-            public void run() { 
-        		System.out.println("Insider run");
-                JFrame frame = new SimplestPossibleExample();
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.pack();
-                frame.setVisible(true);
-           } 
-        });
+		
 	}
 
 	@Focus
