@@ -6,6 +6,7 @@
 
 import gov.nasa.worldwind.BasicModel;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
+import gov.nasa.worldwind.Configuration;
 
 import javax.swing.*;
 
@@ -18,6 +19,17 @@ public class SimplestPossibleExample extends JFrame
 {
     public SimplestPossibleExample()
     {
+		String foobar = Configuration.getUserHomeDirectory();
+		String current = Configuration.getCurrentWorkingDirectory();
+		boolean isWin = Configuration.isWindowsOS();
+
+		String KEYVALUE = Configuration.getStringValue("gov.nasa.worldwind.avkey.MilStd2525IconRetrieverPath");
+
+		System.out.println(foobar);
+		System.out.println(isWin);
+		System.out.println(current);
+		System.out.println(KEYVALUE);
+		
         WorldWindowGLCanvas wwd = new WorldWindowGLCanvas();
         wwd.setPreferredSize(new java.awt.Dimension(1000, 800));
         this.getContentPane().add(wwd, java.awt.BorderLayout.CENTER);
